@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string("title");
             $table->text("description");
+            $table->unsignedBigInteger('status_id');
+            $table->date('deadline');
+            $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->timestamps();
         });
     }
