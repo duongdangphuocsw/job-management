@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Job;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function jobs_following(): BelongsToMany
+    {
+        return $this->belongsToMany(Job::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -10,6 +10,7 @@ class JobController extends Controller
         $job = new Job();
         $job->title = $request->title;
         $job->description = $request->description;
+        $job->status_id = $request->status_id;
         $job->save();
         return $job;
     }
@@ -37,7 +38,19 @@ class JobController extends Controller
     public function getJobs()
     {
         $jobs = Job::all();
+        foreach ($jobs as $job) {
+            // Access user properties
+            echo $job->statuses;
+        
+            // Access user's posts
+            // foreach ($user->posts as $post) {
+            //     // Access post properties
+            //     echo "Post ID: " . $post->id . ", Title: " . $post->title . "\n";
+            // }
+        }
+        // $test = Job::status();
         return $jobs;
+        // return $test;
     }
 
     public function getJob($id)
@@ -47,7 +60,7 @@ class JobController extends Controller
             if (!$job) {
                 return "Can't found";
             }
-            return $job;
+            return $job->status;
         } catch (Throwable $e) {
             report($e);
         }
